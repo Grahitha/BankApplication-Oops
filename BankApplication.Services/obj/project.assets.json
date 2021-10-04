@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "BankApplication.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/BankApplication.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankApplication.Models.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BankApplication.Models/1.0.0": {
+      "type": "project",
+      "path": "../BankApplication.Models/BankApplication.Models.csproj",
+      "msbuildProject": "../BankApplication.Models/BankApplication.Models.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "BankApplication.Models >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Simply\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\BankApplication.Services.csproj",
+      "projectName": "BankApplication.Services",
+      "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\BankApplication.Services.csproj",
+      "packagesPath": "C:\\Users\\Simply\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Simply\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj": {
+              "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
