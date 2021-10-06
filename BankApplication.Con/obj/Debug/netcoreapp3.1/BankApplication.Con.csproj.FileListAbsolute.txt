@@ -1,0 +1,4 @@
+C:\Users\Simply\source\repos\BankApplication\BankApplication.Con\obj\Debug\netcoreapp3.1\BankApplication.Con.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Simply\source\repos\BankApplication\BankApplication.Con\obj\Debug\netcoreapp3.1\BankApplication.Con.AssemblyInfoInputs.cache
+C:\Users\Simply\source\repos\BankApplication\BankApplication.Con\obj\Debug\netcoreapp3.1\BankApplication.Con.AssemblyInfo.cs
+C:\Users\Simply\source\repos\BankApplication\BankApplication.Con\obj\Debug\netcoreapp3.1\BankApplication.Con.csproj.CoreCompileInputs.cache

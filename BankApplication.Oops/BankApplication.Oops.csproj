@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankApplication.Con\BankApplication.Con.csproj" />
+    <ProjectReference Include="..\BankApplication.Models\BankApplication.Models.csproj" />
+    <ProjectReference Include="..\BankApplication.Services\BankApplication.Services.csproj" />
+  </ItemGroup>
+
+</Project>
