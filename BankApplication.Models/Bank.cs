@@ -1,54 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-//using Newtonsoft.Json;
 
 namespace BankApplication.Models
 {
     public class Bank
     {
 
-        public string name { get; set; }
-        public int id { get; set; }
+        public string Name { get; set; }
+        public string Id { get; set; }
         public string address { get; set; }
         public string branch { get; set; }
 
         public List<BankAccount> BankAccounts = new List<BankAccount>();
-        public static List<string> transactions = new List<string>();
-        public Bank(string name, int id, string address, string branch)
+        public Bank(string name,string address, string branch)
         {
-            this.name = name;
-            this.id = id;
+            this.Name = name;
+            this.Id = BankIdGenerator(name);
             this.address = address;
             this.branch = branch;
 
         }
-        public BankAccount login(string accountHolder, string pass)
+        public string BankIdGenerator(string name)
         {
-            BankAccount user = null;
-            foreach (BankAccount account in BankAccounts)
-            {
-                if (account.name == accountHolder & account.password == pass)
-                {
-                    user = account;
-                    Bank.transactions.Add(accountHolder + " account logged in!");
-                }
-
-            }
-            return user;
+            string dt = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string BankId= name.Substring(0, 3) + dt;
+            return BankId;
         }
-        public BankAccount checkAccount(string accountHolder)
-        {
-            BankAccount user = null;
-            foreach (BankAccount account in BankAccounts)
-            {
-                if (account.name == accountHolder)
-                    user = account;
-            }
-            return user;
-        }
+        
 
     }
 }

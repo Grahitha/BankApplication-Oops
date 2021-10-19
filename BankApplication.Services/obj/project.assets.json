@@ -2,22 +2,9 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "BankApplication.Con/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/BankApplication.Con.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BankApplication.Con.dll": {}
-        }
-      },
       "BankApplication.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "BankApplication.Con": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/BankApplication.Models.dll": {}
         },
@@ -28,11 +15,6 @@
     }
   },
   "libraries": {
-    "BankApplication.Con/1.0.0": {
-      "type": "project",
-      "path": "../BankApplication.Con/BankApplication.Con.csproj",
-      "msbuildProject": "../BankApplication.Con/BankApplication.Con.csproj"
-    },
     "BankApplication.Models/1.0.0": {
       "type": "project",
       "path": "../BankApplication.Models/BankApplication.Models.csproj",

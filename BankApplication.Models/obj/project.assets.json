@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
-      "BankApplication.Con/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/BankApplication.Con.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BankApplication.Con.dll": {}
-        }
-      }
-    }
+    ".NETCoreApp,Version=v3.1": {}
   },
-  "libraries": {
-    "BankApplication.Con/1.0.0": {
-      "type": "project",
-      "path": "../BankApplication.Con/BankApplication.Con.csproj",
-      "msbuildProject": "../BankApplication.Con/BankApplication.Con.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": [
-      "BankApplication.Con >= 1.0.0"
-    ]
+    ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
     "C:\\Users\\Simply\\.nuget\\packages\\": {}
@@ -52,11 +33,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Con\\BankApplication.Con.csproj": {
-              "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Con\\BankApplication.Con.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

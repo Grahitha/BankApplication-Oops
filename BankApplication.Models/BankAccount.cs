@@ -1,52 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using BankApplication.Con;
+
 namespace BankApplication.Models
 {
     public class BankAccount
     {
-        public string name { get; set; }
-        public int phoneNumber { get; set; }
-        public int id { get; set; }
-        public int bankId { get; set; }
-        public string password { get; set; }
-        public decimal amount = 0;
+        public string Name { get; set; }
+        public int PhoneNumber { get; set; }
+        public string UserId { get; set; }
+        public int BankId { get; set; }
+        public string Password { get; set; }
+        public decimal Balance = 0;
+        public string Gender { get; set; }
 
-        public void deposit(decimal amt)
+        public List<Transactions> Transactions = new List<Transactions>();
+        public BankAccount(string AccountHolderName,int PhoneNumber,string pass,string gender)
         {
-            this.amount += amt;
-            UserMessages.Output("Amount Deposited Successfully!");
-            Bank.transactions.Add("Amount " + amount + " deposited to " + name + " account");
+            this.Name = AccountHolderName;
+            this.PhoneNumber = PhoneNumber;
+            this.UserId = BankAccountIdGenerator(AccountHolderName);
+            this.Password = pass;
+            this.Gender = gender;
         }
-        public void withdraw(decimal amt)
+        public string  BankAccountIdGenerator(string accountHolderName)
         {
-            if (this.amount >= amt)
-            {
-                this.amount -= amt;
-                Bank.transactions.Add("Amount " + amount + " withdrawn from " + name + " account");
-            }
-            else
-            {
-                UserMessages.Output("Insufficient Amount to Withdraw!");
-            }
+            string dt= DateTime.Now.ToString("yyyyMMddHHmmss");
+            string accountId = accountHolderName.Substring(0, 3) + dt;
+            return accountId;
         }
-        public void transfer(decimal amt, BankAccount rcvr)
-        {
-            if (this.amount >= amt)
-            {
-                this.amount -= amt;
-                rcvr.amount += amt;
-                Bank.transactions.Add("Amount " + amount + " transferred from " + name + " account to " + rcvr.name + " account");
-            }
-            else
-            {
-                UserMessages.Output("Insufficient Amount to Transfer!");
-            }
-        }
-        public decimal viewBalance()
-        {
-            return this.amount;
-        }
+        
     }
+
 }
