@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\BankApplication.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Services\\BankApplication.Services.csproj",
       "projectName": "BankApplication.Services",
-      "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\BankApplication.Services.csproj",
+      "projectPath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Services\\BankApplication.Services.csproj",
       "packagesPath": "C:\\Users\\Simply\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\obj\\",
+      "outputPath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Simply\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj": {
-              "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj"
+            "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Models\\BankApplication.Models.csproj": {
+              "projectPath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Models\\BankApplication.Models.csproj"
             }
           }
         }

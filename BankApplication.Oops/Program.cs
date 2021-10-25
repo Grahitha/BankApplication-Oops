@@ -16,50 +16,30 @@ namespace BankApplication.Oops
                 switch (choice)
                 {
                     case 1:
-                        UserMessages.Output("Please Enter Account Holder Name");    
-                        string Name = UserMessages.ReadInput();
-                        UserMessages.Output("Please Enter valid Mobile Number");
-                        int PhoneNumber = 0;
-                        bool Num = false;
-                        while (!Num)
-                        {
-                            try
-                            {
-                                PhoneNumber = int.Parse(UserMessages.ReadInput());
-                                Num = true;
-                            }
-                            catch (FormatException)
-                            {
-                                UserMessages.Output("Enter Valid Mobile Number");
-                               
-                            }
-                        }
-
-
-                        UserMessages.Output("Please Create Password:");
-                        string Password = UserMessages.ReadInput();
-                        UserMessages.Output("Re-enter Password:");
-                        while (Password != UserMessages.ReadInput())
-                            UserMessages.Output("Password not matched!");
-                        UserMessages.Output("Please Enter Gender(Male/Female):");
-                        string Gender=UserMessages.ReadInput();
-                        string Id;
+                        UserMessages.Output("Enter Bank Name:");
+                        string BankName = Console.ReadLine();
+                        UserMessages.Output("Enter Bank Address:");
+                        string BankAddress = Console.ReadLine();
+                        UserMessages.Output("Enter Bank Branch");
+                        string BankBranch = Console.ReadLine();
+                        UserMessages.Output("Enter Currency code for bank:");
+                        string CurrencyCode = Console.ReadLine();
+                        UserMessages.Output("Gender:(Male/Female)");
+                        string Gender = Console.ReadLine();
                         try
                         {
-                            Id=bankManager.createaccount(Name, PhoneNumber, Password,Gender);
-                            UserMessages.Output("Account created successfully!");
-                            UserMessages.Output("Your account id is:" + Id);
+                            bankManager.CreateBank(BankName, BankAddress, BankBranch, CurrencyCode);
                         }
-                        catch (Exception e)
+                        catch(Exception e)
                         {
                             Console.WriteLine(e);
                         }
                         break;
                     case 2:
                         UserMessages.Output("Please Enter Account Id:");
-                        Id = UserMessages.ReadInput();
+                        string Id = UserMessages.ReadInput();
                         UserMessages.Output("Please Enter Password:");
-                        Password = UserMessages.ReadInput();
+                        string Password = UserMessages.ReadInput();
                         BankAccount bankAccount = bankManager.login(Id, Password);
                         if (bankAccount != null)
                         {
@@ -92,7 +72,7 @@ namespace BankApplication.Oops
                                         break;
                                     case 3:
                                         UserMessages.Output("Enter Account Holder name to Transfer:");
-                                        Name = UserMessages.ReadInput();
+                                        string Name = UserMessages.ReadInput();
                                         BankAccount reciever = bankManager.checkAccount(Name);
                                         if (reciever != null)
                                         {

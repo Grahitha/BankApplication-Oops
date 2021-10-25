@@ -10,7 +10,20 @@ namespace BankApplication.Services
         private Bank bank;
         public Bankservices()
         {
-            this.bank = new Bank("IndiaBank","Kollipara", "SBI");
+            DataBase.CurrencyInitialization();
+        }
+        public string CreateBank(string bankname,string bankaddress, string branch,string currencycode)
+        {
+            if (string.IsNullOrEmpty(bankname))
+                throw new Exception("Name is not valid!");
+            if (DataBase.Banks.Count != 0 & DataBase.Banks.Any(p => p.Name == bankname) == true)
+                throw new Exception("Bank already exists!");
+            if(DataBase.curr.Any(p=>p.Key==currencycode)==true)
+                throw new Exception("Invalid currency code!");
+
+            Bank bank = new Bank(bankname, bankaddress,branch,currencycode);
+            DataBase.Banks.Add(bank);
+            return bank.Id;
         }
         public string createaccount(string accountHolder, int number, string pass,string gender)
         {

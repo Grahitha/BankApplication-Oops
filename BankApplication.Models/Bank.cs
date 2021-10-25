@@ -10,14 +10,18 @@ namespace BankApplication.Models
         public string Id { get; set; }
         public string address { get; set; }
         public string branch { get; set; }
+        public Charge charge { get; set; }
+        public string CurrencyCode { get; set; }
 
         public List<BankAccount> BankAccounts = new List<BankAccount>();
-        public Bank(string name,string address, string branch)
+        public Bank(string name,string address, string branch,string code)
         {
             this.Name = name;
             this.Id = BankIdGenerator(name);
             this.address = address;
             this.branch = branch;
+            this.CurrencyCode = code;
+           
 
         }
         public string BankIdGenerator(string name)
@@ -26,7 +30,14 @@ namespace BankApplication.Models
             string BankId= name.Substring(0, 3) + dt;
             return BankId;
         }
-        
+
 
     }
+    public enum Charge
+    {
+        RTGS,
+        IMPS
+    }
+    
+
 }

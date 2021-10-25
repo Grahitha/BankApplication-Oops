@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj",
+      "projectUniqueName": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Models\\BankApplication.Models.csproj",
       "projectName": "BankApplication.Models",
-      "projectPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\BankApplication.Models.csproj",
+      "projectPath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Models\\BankApplication.Models.csproj",
       "packagesPath": "C:\\Users\\Simply\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Models\\obj\\",
+      "outputPath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Simply\\AppData\\Roaming\\NuGet\\NuGet.Config",

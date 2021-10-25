@@ -8,3 +8,13 @@ C:\Users\Simply\source\repos\BankApplication\BankApplication.Models\obj\Debug\ne
 C:\Users\Simply\source\repos\BankApplication\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.csproj.CoreCompileInputs.cache
 C:\Users\Simply\source\repos\BankApplication\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.dll
 C:\Users\Simply\source\repos\BankApplication\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.pdb
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\bin\Debug\netcoreapp3.1\BankApplication.Models.deps.json
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\bin\Debug\netcoreapp3.1\BankApplication.Models.dll
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\bin\Debug\netcoreapp3.1\BankApplication.Models.pdb
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.csproj.AssemblyReference.cache
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.AssemblyInfoInputs.cache
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.AssemblyInfo.cs
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.csproj.CoreCompileInputs.cache
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.dll
+C:\Users\Simply\source\repos\Bank\BankApplication.Models\obj\Debug\netcoreapp3.1\BankApplication.Models.pdb

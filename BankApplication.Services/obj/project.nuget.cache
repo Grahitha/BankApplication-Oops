@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+1IvHcL+C6PMnLYZkI7RZjclBvyLiJ1dGs9TvMte7tJhsf/4o2Djzxc5SMbTcqU+D+Tnq7Ak5R8dGTNH1sU3eg==",
+  "dgSpecHash": "r8silwvqNTRgEcqOChVq6M4XyfskJEYpBgb6KVtg/2gdNNOBedijGX68BbZ+fo5/OhmcPYbqP2BQczNW57L4rQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Simply\\source\\repos\\BankApplication\\BankApplication.Services\\BankApplication.Services.csproj",
+  "projectFilePath": "C:\\Users\\Simply\\source\\repos\\Bank\\BankApplication.Services\\BankApplication.Services.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
