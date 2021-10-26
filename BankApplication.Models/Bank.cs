@@ -14,6 +14,7 @@ namespace BankApplication.Models
         public string CurrencyCode { get; set; }
 
         public List<BankAccount> BankAccounts = new List<BankAccount>();
+        public List<BankStaff> StaffAcounts = new List<BankStaff>();
         public Bank(string name,string address, string branch,string code)
         {
             this.Name = name;
