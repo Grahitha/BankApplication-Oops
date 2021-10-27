@@ -14,11 +14,11 @@ namespace BankApplication.Models
         public string Gender { get; set; }
 
         public List<Transactions> Transactions = new List<Transactions>();
-        public BankAccount(string AccountHolderName,int PhoneNumber,string pass,string gender)
+        public BankAccount(string Name,int PhoneNumber,string pass,string gender)
         {
-            this.Name = AccountHolderName;
+            this.Name = Name;
             this.PhoneNumber = PhoneNumber;
-            this.UserId = BankAccountIdGenerator(AccountHolderName);
+            this.UserId = BankAccountIdGenerator(Name);
             this.Password = pass;
             this.Gender = gender;
         }

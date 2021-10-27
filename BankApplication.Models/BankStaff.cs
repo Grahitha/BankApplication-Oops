@@ -6,7 +6,7 @@ namespace BankApplication.Models
 {
     public class BankStaff : BankAccount
     {
-        public BankStaff(string name,int number,string password,string gender)
+        public BankStaff(string name, int number, string password, string gender) :base(name,number,password,gender)
         {
             this.Name = name;
             this.PhoneNumber = number;

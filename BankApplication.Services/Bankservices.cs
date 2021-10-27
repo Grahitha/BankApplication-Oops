@@ -57,7 +57,7 @@ namespace BankApplication.Services
             return Id;
         }
 
-        public BankAccount login(string Id, string pass)
+        public BankAccount login(string Id, string pass,int choice)
         {
             BankAccount user = null;
             foreach (BankAccount account in bank.BankAccounts)

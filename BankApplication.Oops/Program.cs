@@ -76,11 +76,26 @@ namespace BankApplication.Oops
                         }
                         break;
                     case 3:
+                        UserMessages.Output("1.staff\n2.Customer");
+                        choice = Convert.ToInt32(UserMessages.ReadInput());
                         UserMessages.Output("Please Enter Account Id:");
                         Id = UserMessages.ReadInput();
                         UserMessages.Output("Please Enter Password:");
                         Password = UserMessages.ReadInput();
-                        BankAccount bankAccount = bankManager.login(Id, Password);
+                        BankAccount bankAccount;
+                        if (choice==1)
+                        {
+                            bankAccount = bankManager.login(Id, Password,1);
+                            UserMessages.Output("1.Create Account\n2.Update Account\n3.Delete Account\n4.Add Currency\n5.Add service charge for same bank\n6.Add service charge for other bank account\n7.View Account history\n8.Revert transaction");
+
+                        }
+                        else
+                        {
+                            bankAccount = bankManager.login(Id, Password,0);
+                            UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History")
+                        }
+                        
+                        
                         if (bankAccount != null)
                         {
                             UserMessages.Output("Login Successfull!");
