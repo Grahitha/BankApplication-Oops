@@ -18,7 +18,7 @@ namespace BankApplication.Services
                 throw new Exception("Name is not valid!");
             if (DataBase.Banks.Count != 0 & DataBase.Banks.Any(p => p.Name == bankname) == true)
                 throw new Exception("Bank already exists!");
-            if(DataBase.curr.Any(p=>p.Key==currencycode)==true)
+            if(DataBase.curr.Any(p=>p.Key==currencycode)!=true)
                 throw new Exception("Invalid currency code!");
 
             Bank bank = new Bank(bankname, bankaddress,branch,currencycode);

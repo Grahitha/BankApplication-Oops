@@ -92,7 +92,7 @@ namespace BankApplication.Oops
                         else
                         {
                             bankAccount = bankManager.login(Id, Password,0);
-                            UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History")
+                            UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History");
                         }
                         
                         
