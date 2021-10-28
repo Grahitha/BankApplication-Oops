@@ -25,7 +25,7 @@ namespace BankApplication.Oops
         }
         public static void LoginMenu()
         {
-            Console.WriteLine("1.Create Bank\n2.Create Account\n3.Login\n3.Exit\n");
+            Console.WriteLine("1.Create Bank\n2.Create Account\n3.Login\n4.Exit\n");
         }
         public static void TransactionMenu()
         {

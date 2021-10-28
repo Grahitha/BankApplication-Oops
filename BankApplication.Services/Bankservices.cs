@@ -58,7 +58,7 @@ namespace BankApplication.Services
             return Id;
         }
 
-        public BankAccount login(string BankId, string UserId, string pass, int choice)
+        public BankAccount login(string BankId, string UserId, string pass)
         {
             foreach (var i in DataBase.Banks)
             {
@@ -67,8 +67,29 @@ namespace BankApplication.Services
                     bank = i;
                 }
             }
+
             BankAccount user = null;
             foreach (BankAccount account in bank.BankAccounts)
+            {
+                if (account.UserId == UserId & account.Password == pass)
+                    user = account;
+
+            }
+            return user;
+
+
+        }
+        public BankStaff stafflogin(string BankId, string UserId, string pass)
+        {
+            foreach (var i in DataBase.Banks)
+            {
+                if (i.Id == BankId)
+                {
+                    bank = i;
+                }
+            }
+            BankStaff user = null;
+            foreach (BankStaff account in bank.StaffAcounts)
             {
                 if (account.UserId == UserId & account.Password == pass)
                     user = account;
@@ -96,7 +117,7 @@ namespace BankApplication.Services
         public void deposit(BankAccount user, decimal amt,string code)
         {
             user.Balance += Math.Round(amt * (decimal)(DataBase.curr[code] / DataBase.curr["INR"]), 2);
-            Transactions trans = new Transactions(amt, 0, user.UserId, user.UserId, bank.Id);
+            Transactions trans = new Transactions(amt, 0, user.UserId, user.UserId, bank.Id,bank.Id);
             user.Transactions.Add(trans);
         }
         public bool withdraw(BankAccount user, decimal amt)
@@ -104,7 +125,7 @@ namespace BankApplication.Services
             if (user.Balance >= amt)
             {
                 user.Balance -= amt;
-                Transactions trans = new Transactions(amt, 1, user.UserId, user.UserId, bank.Id);
+                Transactions trans = new Transactions(amt, 1, user.UserId, user.UserId, bank.Id,bank.Id);
                 user.Transactions.Add(trans);
                 return true;
             }
@@ -157,9 +178,9 @@ namespace BankApplication.Services
                 user.Balance -= amt;
 
                 rcvr.Balance += Math.Round(amt * (decimal)(DataBase.curr[bank.CurrencyCode] / DataBase.curr[reciever.CurrencyCode]), 2);
-                Transactions trans = new Transactions(amt, 1, user.UserId, rcvr.UserId, bank.Id);
+                Transactions trans = new Transactions(amt, 1, user.UserId, rcvr.UserId, fromid,toid);
                 user.Transactions.Add(trans);
-                Transactions rcvrtrans = new Transactions(amt, 0, rcvr.UserId, user.UserId, bank.Id);
+                Transactions rcvrtrans = new Transactions(amt, 0, rcvr.UserId, user.UserId, fromid,toid);
                 rcvr.Transactions.Add(rcvrtrans);
                 return true;
             }
@@ -220,5 +241,68 @@ namespace BankApplication.Services
         {
             return (decimal)Math.Round(amount * ((100 - Convert.ToDecimal(percent)) / 100), 2);
         }
+        public void RevertTransaction(string bankid,string accountid,string transid)
+        {
+            Transactions revert = null;
+            BankAccount sender = null;
+            BankAccount rcvr = null;
+            foreach(var i in DataBase.Banks)
+            {
+                if(i.Id==bankid)
+                {
+                    foreach(var j in i.BankAccounts)
+                    {
+                        if(j.UserId==accountid)
+                        {
+                            foreach(var k in j.Transactions)
+                            {
+                                if(k.Id==transid)
+                                {
+                                    revert = k;
+                                    sender = j;
+                                 
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            foreach(var i in DataBase.Banks)
+            {
+                if(i.Id==revert.RecieverBankId)
+                {
+                    foreach(var j in i.BankAccounts)
+                    {
+                        if(j.UserId==revert.RecieverAccountId)
+                        {
+                            rcvr = j;
+                        }
+                    }
+                }
+            }
+            sender.Balance += revert.Amount;
+            rcvr.Balance -= revert.Amount;
+        }
+        public BankAccount UpdateChanges(string bankId,string userid)
+        {
+            foreach (var i in DataBase.Banks)
+            {
+                if (i.Id == bankId)
+                {
+                    bank = i;
+                }
+            }
+            BankAccount user = null;
+            foreach (BankAccount account in bank.BankAccounts)
+            {
+                if (account.UserId == userid)
+                    user = account;
+
+            }
+            return user;
+
+        }
     }
+
 }

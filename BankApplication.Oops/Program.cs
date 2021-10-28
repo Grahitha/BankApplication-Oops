@@ -12,8 +12,8 @@ namespace BankApplication.Oops
             while (true)
             {
                 UserMessages.LoginMenu();
-                int choice = int.Parse(UserMessages.ReadInput());
-                switch (choice)
+                int choice1 = int.Parse(UserMessages.ReadInput());
+                switch (choice1)
                 {
                     case 1:
                         UserMessages.Output("Enter Bank Name:");
@@ -79,7 +79,7 @@ namespace BankApplication.Oops
                     case 3:
                         //enter bankid
                         UserMessages.Output("1.staff\n2.Customer");
-                        choice = Convert.ToInt32(UserMessages.ReadInput());
+                        int choice2 = Convert.ToInt32(UserMessages.ReadInput());
                         UserMessages.Output("Enter BankID;");
                         BankId = UserMessages.ReadInput();
                         UserMessages.Output("Please Enter Account Id:");
@@ -87,18 +87,26 @@ namespace BankApplication.Oops
                         UserMessages.Output("Please Enter Password:");
                         Password = UserMessages.ReadInput();
                         BankAccount bankAccount;
-                        if (choice==1)
+                        BankStaff bankstaff;
+                        if (choice2==1)
                         {
-                            bankAccount = bankManager.login(BankId,Id, Password,1);
-                            UserMessages.Output("1.Create Account\n2.Update Account\n3.Delete Account\n4.Add Currency\n5.Add service charge for same bank\n6.Add service charge for other bank account\n7.View Account history\n8.Revert transaction");
-                            choice = Convert.ToInt32(UserMessages.ReadInput());
-                            if (bankAccount != null)
+                            bankstaff = bankManager.stafflogin(BankId,Id, Password);
+                            if(bankstaff==null)
                             {
-                                UserMessages.Output("Login Successfull!");
+                                UserMessages.Output("Invalid details");
+                                break;
+                            }
+                            UserMessages.Output("Login Successfull!");
+                            
+                            if (bankstaff != null)
+                            {
+                                
                                 bool logout = false;
                                 while (!logout)
                                 {
-                                    switch (choice)
+                                    UserMessages.Output("1.Create Account\n2.Update Account\n3.Delete Account\n4.Add Currency\n5.Add service charge for same bank\n6.Add service charge for other bank account\n7.View Account history\n8.Revert transaction\n9.Exit");
+                                    int choice3 = Convert.ToInt32(UserMessages.ReadInput());
+                                    switch (choice3)
                                     {
                                         case 1:
                                             //create account
@@ -132,7 +140,7 @@ namespace BankApplication.Oops
                                             Gender = UserMessages.ReadInput();
                                             try
                                             {
-                                                Id = bankManager.createaccount(BankId, Name, PhoneNumber, Password, Gender, 0);
+                                                Id = bankManager.createaccount(BankId, Name, PhoneNumber, Password, Gender, 1);
                                                 UserMessages.Output("Account created successfully!");
                                                 UserMessages.Output("Your account id is:" + Id);
                                             }
@@ -144,12 +152,34 @@ namespace BankApplication.Oops
                                         case 2:
                                             //update
                                             UserMessages.Output("What do you want to update!");
-
+                                            UserMessages.Output("1.Name\n2.Phone Number\n3.Password\n");
+                                            int choice6 = Convert.ToInt32(UserMessages.ReadInput());
+                                            UserMessages.Output("Enter UserId you want to update:");
+                                            string UserId = UserMessages.ReadInput();
+                                            bankAccount=bankManager.UpdateChanges(BankId,UserId);
+                                            switch(choice6)
+                                            {
+                                                case 1:
+                                                    UserMessages.Output("Enter Name:");
+                                                    bankAccount.Name = UserMessages.ReadInput();
+                                                    break;
+                                                case 2:
+                                                    UserMessages.Output("Enter Phone Number:");
+                                                    bankAccount.PhoneNumber = Convert.ToInt32(UserMessages.ReadInput());
+                                                    break;
+                                                case 3:
+                                                    UserMessages.Output("Enter Password:");
+                                                    bankAccount.Password = UserMessages.ReadInput();
+                                                    break;
+                                                default:
+                                                    Environment.Exit(1);
+                                                    break;
+                                            }
                                             break;
                                         case 3:
                                             //delete
                                             UserMessages.Output("Enter UserId you want to delete:");
-                                            string UserId = UserMessages.ReadInput();
+                                            UserId = UserMessages.ReadInput();
                                             bankManager.DeleteAccount(BankId, UserId);
                                             break;
                                         case 4:
@@ -182,6 +212,11 @@ namespace BankApplication.Oops
                                             UserMessages.Output("Enter TransactionID :");
                                             string id = UserMessages.ReadInput();
                                             bankAccount = bankManager.ViewHistory(id);
+                                            if(bankAccount==null)
+                                            {
+                                                UserMessages.Output("Invalid!");
+                                                break;
+                                            }
                                             foreach (var i in bankAccount.Transactions)
                                             {
                                                 UserMessages.History(i);
@@ -190,6 +225,13 @@ namespace BankApplication.Oops
 
                                         case 8:
                                             //revert
+                                            UserMessages.Output("Enter Bank Id to revert:");
+                                            BankId= UserMessages.ReadInput();
+                                            UserMessages.Output("Enter User Id to revert:");
+                                            UserId= UserMessages.ReadInput();
+                                            UserMessages.Output("Enter Transaction Id to revert:");
+                                            Id = UserMessages.ReadInput();
+                                            bankManager.RevertTransaction(BankId,UserId,Id);
                                             break;
                                         default:
                                             logout = true;
@@ -207,16 +249,22 @@ namespace BankApplication.Oops
                         }
                         else
                         {
-                            bankAccount = bankManager.login(BankId,Id, Password,0);
-                            UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History");
-                            choice = Convert.ToInt32(UserMessages.ReadInput());
+                            bankAccount = bankManager.login(BankId,Id, Password);
+                            if (bankAccount == null)
+                            {
+                                UserMessages.Output("Invalid details");
+                                break;
+                            }
+                            UserMessages.Output("Login Successfull!");
                             if (bankAccount != null)
                             {
-                                UserMessages.Output("Login Successfull!");
+                                
                                 bool logout = false;
                                 while (!logout)
                                 {
-                                    switch (choice)
+                                    UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History\n5.Exit");
+                                    int choice4 = Convert.ToInt32(UserMessages.ReadInput());
+                                    switch (choice4)
                                     {
                                         case 1:
                                             UserMessages.Output("Please Enter Valid Amount to Deposit:");
@@ -244,7 +292,7 @@ namespace BankApplication.Oops
                                             UserMessages.Output("Enter REceiver BankId");
                                             string ToBankId = UserMessages.ReadInput();
                                             UserMessages.Output("Select type:\n1.RTGS\n2.IMPS");
-                                            choice = Convert.ToInt32(UserMessages.ReadInput());
+                                            int choice5 = Convert.ToInt32(UserMessages.ReadInput());
                                             UserMessages.Output("Enter Account Holder name to Transfer:");
                                             Name = UserMessages.ReadInput();
                                             BankAccount reciever = bankManager.checkAccount(ToBankId,Name);
@@ -252,7 +300,7 @@ namespace BankApplication.Oops
                                             {
                                                 UserMessages.Output("Enter Amount to Transfer:");
                                                 decimal amtToTransfer = Decimal.Parse(UserMessages.ReadInput());
-                                                if (bankManager.transfer(bankAccount, amtToTransfer, reciever,BankId,ToBankId,choice))
+                                                if (bankManager.transfer(bankAccount, amtToTransfer, reciever,BankId,ToBankId,choice5))
                                                 {
                                                     UserMessages.Output(amtToTransfer + " transferred successfully!");
                                                 }
