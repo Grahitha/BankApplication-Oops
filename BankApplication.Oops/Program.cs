@@ -26,7 +26,8 @@ namespace BankApplication.Oops
                         string CurrencyCode = Console.ReadLine();   
                         try
                         {
-                            bankManager.CreateBank(BankName, BankAddress, BankBranch, CurrencyCode);
+                            string bankid=bankManager.CreateBank(BankName, BankAddress, BankBranch, CurrencyCode);
+                            Console.WriteLine("BankID is:"+bankid);
                         }
                         catch(Exception e)
                         {
@@ -76,8 +77,11 @@ namespace BankApplication.Oops
                         }
                         break;
                     case 3:
+                        //enter bankid
                         UserMessages.Output("1.staff\n2.Customer");
                         choice = Convert.ToInt32(UserMessages.ReadInput());
+                        UserMessages.Output("Enter BankID;");
+                        BankId = UserMessages.ReadInput();
                         UserMessages.Output("Please Enter Account Id:");
                         Id = UserMessages.ReadInput();
                         UserMessages.Output("Please Enter Password:");
@@ -85,99 +89,207 @@ namespace BankApplication.Oops
                         BankAccount bankAccount;
                         if (choice==1)
                         {
-                            bankAccount = bankManager.login(Id, Password,1);
+                            bankAccount = bankManager.login(BankId,Id, Password,1);
                             UserMessages.Output("1.Create Account\n2.Update Account\n3.Delete Account\n4.Add Currency\n5.Add service charge for same bank\n6.Add service charge for other bank account\n7.View Account history\n8.Revert transaction");
+                            choice = Convert.ToInt32(UserMessages.ReadInput());
+                            if (bankAccount != null)
+                            {
+                                UserMessages.Output("Login Successfull!");
+                                bool logout = false;
+                                while (!logout)
+                                {
+                                    switch (choice)
+                                    {
+                                        case 1:
+                                            //create account
+                                            UserMessages.Output("Please Enter Account Holder Name");
+                                            Name = UserMessages.ReadInput();
+                                            UserMessages.Output("Please Enter valid Mobile Number");
+                                            PhoneNumber = 0;
+                                            //valid number
+                                            Num = false;
+                                            while (!Num)
+                                            {
+                                                try
+                                                {
+                                                    PhoneNumber = int.Parse(UserMessages.ReadInput());
+                                                    Num = true;
+                                                }
+                                                catch (FormatException)
+                                                {
+                                                    UserMessages.Output("Enter Valid Mobile Number");
+
+                                                }
+                                            }
+
+
+                                            UserMessages.Output("Please Create Password:");
+                                            Password = UserMessages.ReadInput();
+                                            UserMessages.Output("Re-enter Password:");
+                                            while (Password != UserMessages.ReadInput())
+                                                UserMessages.Output("Password not matched!");
+                                            UserMessages.Output("Please Enter Gender(Male/Female):");
+                                            Gender = UserMessages.ReadInput();
+                                            try
+                                            {
+                                                Id = bankManager.createaccount(BankId, Name, PhoneNumber, Password, Gender, 0);
+                                                UserMessages.Output("Account created successfully!");
+                                                UserMessages.Output("Your account id is:" + Id);
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                            }
+                                            break;
+                                        case 2:
+                                            //update
+                                            UserMessages.Output("What do you want to update!");
+
+                                            break;
+                                        case 3:
+                                            //delete
+                                            UserMessages.Output("Enter UserId you want to delete:");
+                                            string UserId = UserMessages.ReadInput();
+                                            bankManager.DeleteAccount(BankId, UserId);
+                                            break;
+                                        case 4:
+                                            //add currency
+                                            UserMessages.Output("Enter currencycode:");
+                                            string code = UserMessages.ReadInput();
+                                            UserMessages.Output("Enter Exchange rate:");
+                                            double rate = Convert.ToDouble(UserMessages.ReadInput());
+                                            bankManager.AddCurrency(code, rate);
+                                            break;
+                                        case 5:
+                                            //add charge same account
+                                            UserMessages.Output("Enter new charge for RTGS:");
+                                            int Rtgs = Convert.ToInt32(Console.ReadLine());
+                                            UserMessages.Output("Enter new charge for IMPS");
+                                            int Imps = Convert.ToInt32(Console.ReadLine());
+                                            bankManager.UpdateCharges(Rtgs, Imps, 1);
+
+                                            break;
+                                        case 6:
+                                            //addd charge dif acount
+                                            UserMessages.Output("Enter new charge for RTGS:");
+                                            Rtgs = Convert.ToInt32(Console.ReadLine());
+                                            UserMessages.Output("Enter new charge for IMPS");
+                                            Imps = Convert.ToInt32(Console.ReadLine());
+                                            bankManager.UpdateCharges(Rtgs, Imps, 1);
+                                            break;
+                                        case 7:
+                                            //transaction history
+                                            UserMessages.Output("Enter TransactionID :");
+                                            string id = UserMessages.ReadInput();
+                                            bankAccount = bankManager.ViewHistory(id);
+                                            foreach (var i in bankAccount.Transactions)
+                                            {
+                                                UserMessages.History(i);
+                                            }
+                                            break;
+
+                                        case 8:
+                                            //revert
+                                            break;
+                                        default:
+                                            logout = true;
+                                            break;
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                UserMessages.Output("Invalid Credentials!");
+                            }
+                            
 
                         }
                         else
                         {
-                            bankAccount = bankManager.login(Id, Password,0);
+                            bankAccount = bankManager.login(BankId,Id, Password,0);
                             UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.Transaction History");
-                        }
-                        
-                        
-                        if (bankAccount != null)
-                        {
-                            UserMessages.Output("Login Successfull!");
-                            bool logout = false;
-                            while (!logout)
+                            choice = Convert.ToInt32(UserMessages.ReadInput());
+                            if (bankAccount != null)
                             {
-                                UserMessages.TransactionMenu();
-                                choice = int.Parse(UserMessages.ReadInput());
-                                switch (choice)
+                                UserMessages.Output("Login Successfull!");
+                                bool logout = false;
+                                while (!logout)
                                 {
-                                    case 1:
-                                        UserMessages.Output("Please Enter Valid Amount to Deposit:");
-                                        int amount = int.Parse(UserMessages.ReadInput());
-                                        bankManager.deposit(bankAccount,amount);
-                                        UserMessages.Output(amount + " deposited successfully!");
-
-                                        break;
-                                    case 2:
-                                        UserMessages.Output("Please Enter Amount to Withdraw:");
-                                        amount = int.Parse(UserMessages.ReadInput());
-                                        if(bankManager.withdraw(bankAccount,amount))
-                                        {
-                                            UserMessages.Output(amount + " withdrawn successfully!");
-                                        }
-                                        else
-                                        {
-                                            UserMessages.Output("Insufficient Amount to Withdraw!");
-                                        }
-                                        break;
-                                    case 3:
-                                        UserMessages.Output("Enter Account Holder name to Transfer:");
-                                        Name = UserMessages.ReadInput();
-                                        BankAccount reciever = bankManager.checkAccount(Name);
-                                        if (reciever != null)
-                                        {
-                                            UserMessages.Output("Enter Amount to Transfer:");
-                                            decimal amtToTransfer = Decimal.Parse(UserMessages.ReadInput());
-                                            if(bankManager.transfer(bankAccount,amtToTransfer, reciever))
+                                    switch (choice)
+                                    {
+                                        case 1:
+                                            UserMessages.Output("Please Enter Valid Amount to Deposit:");
+                                            int amount = int.Parse(UserMessages.ReadInput());
+                                            UserMessages.Output("Enter currency code");
+                                            CurrencyCode = UserMessages.ReadInput();
+                                            bankManager.deposit(bankAccount, amount,CurrencyCode);
+                                            UserMessages.Output(amount + " deposited successfully!");
+                                            break;
+                                        case 2:
+                                            //withdraw
+                                            UserMessages.Output("Please Enter Amount to Withdraw:");
+                                            amount = int.Parse(UserMessages.ReadInput());
+                                            if (bankManager.withdraw(bankAccount, amount))
                                             {
-                                                UserMessages.Output(amtToTransfer + " transferred successfully!");
+                                                UserMessages.Output(amount + " withdrawn successfully!");
                                             }
                                             else
                                             {
-                                                UserMessages.Output("Insufficient amount to transfer!");
+                                                UserMessages.Output("Insufficient Amount to Withdraw!");
                                             }
-                                        }
-                                        else
-                                        {
-                                            UserMessages.Output("Receiver Account does not Exist!");
-                                        }
-                                        break;
-                                    case 4:
-                                        UserMessages.ValueOutput(bankManager.viewBalance(bankAccount));
-                                        break;
-                                    case 5:
-                                        Console.WriteLine();
-                                        foreach(var i in bankAccount.Transactions)
-                                        {
-                                            Console.WriteLine("Transaction ID:" + i.Id);
-                                            Console.WriteLine(i.Amount);
-                                            Console.WriteLine(i.Type+" to/from your account ");
-                                            if(i.SenderAccountId!=i.RecieverAccountId)
+                                            break;
+                                        case 3:
+                                            //transfer
+                                            UserMessages.Output("Enter REceiver BankId");
+                                            string ToBankId = UserMessages.ReadInput();
+                                            UserMessages.Output("Select type:\n1.RTGS\n2.IMPS");
+                                            choice = Convert.ToInt32(UserMessages.ReadInput());
+                                            UserMessages.Output("Enter Account Holder name to Transfer:");
+                                            Name = UserMessages.ReadInput();
+                                            BankAccount reciever = bankManager.checkAccount(ToBankId,Name);
+                                            if (reciever != null)
                                             {
-                                                Console.WriteLine("From " + i.SenderAccountId + " to    " + i.RecieverAccountId);
+                                                UserMessages.Output("Enter Amount to Transfer:");
+                                                decimal amtToTransfer = Decimal.Parse(UserMessages.ReadInput());
+                                                if (bankManager.transfer(bankAccount, amtToTransfer, reciever,BankId,ToBankId,choice))
+                                                {
+                                                    UserMessages.Output(amtToTransfer + " transferred successfully!");
+                                                }
+                                                else
+                                                {
+                                                    UserMessages.Output("Insufficient amount to transfer!");
+                                                }
                                             }
-                                            Console.WriteLine(i.On.ToString());
-                                        }
-                                        break;
-                                    default:
-                                        logout = true;
-                                      
-                                        break;
-
+                                            else
+                                            {
+                                                UserMessages.Output("Receiver Account does not Exist!");
+                                            }
+                                            break;
+                                        case 4:
+                                            //transaction history
+                                            Console.WriteLine();
+                                            foreach (var i in bankAccount.Transactions)
+                                            {
+                                                UserMessages.History(i);
+                                            }
+                                            break;
+                                        case 5:
+                                            UserMessages.ValueOutput(bankManager.viewBalance(bankAccount));
+                                            break;
+                                        default:
+                                            logout = true;
+                                            break;
+                                    }
                                 }
+
                             }
-
+                            else
+                            {
+                                
+                            }
+                            
                         }
-                        else
-                        {
-                            UserMessages.Output("Invalid Credentials!");
-                        }
-
                         break;
                     default:
                         

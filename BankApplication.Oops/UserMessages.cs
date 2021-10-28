@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -30,10 +31,18 @@ namespace BankApplication.Oops
         {
             UserMessages.Output("1.Deposit\n2.Withdraw\n3.Transfer\n4.View Balance\n5.Transaction History\n6.Logout");
         }
-        /*public static CreateBankAccount()
+        public static void History(Transactions i)
         {
-            
-        }*/
+            Console.WriteLine("Transaction ID:" + i.Id);
+            Console.WriteLine(i.Amount);
+            Console.WriteLine(i.Type + " to/from your account ");
+            if (i.SenderAccountId != i.RecieverAccountId)
+            {
+                Console.WriteLine("From " + i.SenderAccountId + " to    " + i.RecieverAccountId);
+            }
+            Console.WriteLine(i.On.ToString());
+        }
+        
 
        
     }
