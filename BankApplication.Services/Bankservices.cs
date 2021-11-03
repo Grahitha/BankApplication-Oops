@@ -28,13 +28,8 @@ namespace BankApplication.Services
         public string createaccount(string BankId, string accountHolder, int number, string pass, string gender, int choice)
         {
             string Id;
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == BankId)
-                {
-                    bank = i;
-                }
-            }
+            bank = FindBank(BankId);
+            
             if (string.IsNullOrEmpty(accountHolder))
                 throw new Exception("Name is not valid!");
             if (bank.BankAccounts.Count != 0 & bank.BankAccounts.Any(p => p.Name == accountHolder) == true)
@@ -60,13 +55,7 @@ namespace BankApplication.Services
 
         public BankAccount login(string BankId, string UserId, string pass)
         {
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == BankId)
-                {
-                    bank = i;
-                }
-            }
+            bank = FindBank(BankId);
 
             BankAccount user = null;
             foreach (BankAccount account in bank.BankAccounts)
@@ -81,13 +70,7 @@ namespace BankApplication.Services
         }
         public BankStaff stafflogin(string BankId, string UserId, string pass)
         {
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == BankId)
-                {
-                    bank = i;
-                }
-            }
+            bank = FindBank(BankId);
             BankStaff user = null;
             foreach (BankStaff account in bank.StaffAcounts)
             {
@@ -100,13 +83,7 @@ namespace BankApplication.Services
         public BankAccount checkAccount(string BankId,string accountHolder)
         {
             BankAccount user = null;
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == BankId)
-                {
-                    bank = i;
-                }
-            }
+            bank = FindBank(BankId);
             foreach (BankAccount account in bank.BankAccounts)
             {
                 if (account.Name == accountHolder)
@@ -190,23 +167,12 @@ namespace BankApplication.Services
         {
             return user.Balance;
         }
-        public void DeleteAccount(string BankId, string UserId)
+        public void DeleteAccount(string BankId, string userid)
         {
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == BankId)
-                {
-                    bank = i;
-                }
-            }
+            bank = FindBank(BankId);
+
             BankAccount user = null;
-            foreach (var i in bank.BankAccounts)
-            {
-                if (i.UserId == UserId)
-                {
-                    user = i;
-                }
-            }
+            user = FindAccount(bank, userid);
             bank.BankAccounts.Remove(user);
         }
         public void AddCurrency(string code, double rate)
@@ -226,15 +192,10 @@ namespace BankApplication.Services
                 bank.DiffIMPS = imps;
             }
         }
-        public BankAccount ViewHistory(string Id)
+        public BankAccount ViewHistory(string userid)
         {
             BankAccount user = null;
-            foreach (BankAccount account in bank.BankAccounts)
-            {
-                if (account.UserId == Id)
-                    user = account;
-
-            }
+            user = FindAccount(bank, userid);
             return user;
         }
         public decimal deductCharges(decimal amount, double percent)
@@ -284,25 +245,37 @@ namespace BankApplication.Services
             sender.Balance += revert.Amount;
             rcvr.Balance -= revert.Amount;
         }
-        public BankAccount UpdateChanges(string bankId,string userid)
+        public BankAccount UpdateChanges(string BankId,string userid)
         {
-            foreach (var i in DataBase.Banks)
-            {
-                if (i.Id == bankId)
-                {
-                    bank = i;
-                }
-            }
-            BankAccount user = null;
-            foreach (BankAccount account in bank.BankAccounts)
-            {
-                if (account.UserId == userid)
-                    user = account;
+            bank = FindBank(BankId);
 
-            }
+            BankAccount user = null;
+            user = FindAccount(bank, userid);
             return user;
 
         }
+        public static Bank FindBank(string BankId)
+        {
+            foreach (var i in DataBase.Banks)
+            {
+                if (i.Id == BankId)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+        public static BankAccount FindAccount(Bank bank,string userid)
+        {
+            foreach (BankAccount account in bank.BankAccounts)
+            {
+                if (account.UserId == userid)
+                    return account;
+
+            }
+            return null;
+        }
+     
     }
 
 }
